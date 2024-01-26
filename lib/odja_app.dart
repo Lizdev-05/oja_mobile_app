@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:odja/odja_page.dart';
 import 'package:odja/pages/favorite_screen.dart';
 import 'package:odja/pages/home_screen.dart';
 import 'package:odja/pages/profile_screen.dart';

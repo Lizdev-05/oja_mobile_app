@@ -21,7 +21,6 @@ class _OdjaPageState extends State<OdjaPage> {
     var result = await http.get(convertedUri);
     if (result.statusCode == 200) {
       List reusltingList = jsonDecode(result.body) as List;
-      print("Result: " + reusltingList.toString());
       reusltingList.forEach(
         (element) {
           products.add(Product.fromJson(element));
@@ -39,80 +38,98 @@ class _OdjaPageState extends State<OdjaPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.purpleAccent,
-      appBar: AppBar(
-        backgroundColor: Colors.purpleAccent,
-        leadingWidth: 100,
-        leading: Container(
-          margin: const EdgeInsets.only(left: 8),
-          child: ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Image.network(
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnIdelCqs6_RCXLXk718e2HL90dSyxj382yg&usqp=CAU",
-                fit: BoxFit.cover,
-                width: 20,
-                height: 20,
-              )),
+    return SingleChildScrollView(
+      child: Container(
+        margin: const EdgeInsets.only(
+          left: 8,
+          right: 8,
         ),
-        actions: const [
-          Icon(Icons.notifications),
-        ],
-      ),
-      body: Expanded(
-        child: Container(
-          margin: const EdgeInsets.only(left: 8, right: 8, top: 15),
-          child: products.isEmpty
-              ? Center(
-                  child: Text(
+        child: products.isEmpty
+            ? Center(
+                child: Text(
                   'No products found.',
                   style: GoogleFonts.lato(fontSize: 20, color: Colors.white),
-                ))
-              : ListView.separated(
+                ),
+              )
+            : SizedBox(
+                height: MediaQuery.of(context).size.height - 350,
+                child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 100 / 140,
+                    crossAxisSpacing: 12,
+                    mainAxisSpacing: 12,
+                  ),
                   itemCount: products.length,
                   itemBuilder: (BuildContext context, index) {
-                    Product product = products[index];
-                    return Container(
-                      // height: 50,
-                      // color: Colors.purple,
-                      child: ListTile(
-                        title: Text(
-                          product.title,
-                          style: GoogleFonts.lato(
-                              color: Color.fromARGB(255, 43, 41, 41),
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        subtitle: Text(
-                          "Subtitle of the item",
-                          style: GoogleFonts.lato(
-                            color: const Color.fromARGB(255, 46, 46, 46),
-                            fontSize: 15,
-                          ),
-                        ),
-                        leading: Image.network(
-                          product.image,
-                          fit: BoxFit.cover,
-                          width: 48,
-                          height: 48,
-                        ),
-                        trailing: Text(
-                          product.price,
-                          style: GoogleFonts.lato(
-                              color: Color.fromARGB(255, 43, 41, 41),
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    );
-                  },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const SizedBox(
-                      height: 50,
-                    );
+                    return ProductWidget(product: products[index]);
                   },
                 ),
-        ),
+              ),
+      ),
+    );
+  }
+}
+
+// ProductWidget.dart
+class ProductWidget extends StatelessWidget {
+  final Product product;
+
+  const ProductWidget({Key? key, required this.product}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    String shortenedTitle = product.title.length > 20
+        ? product.title.substring(0, 10) + '...'
+        : product.title;
+    return Container(
+      width: MediaQuery.of(context).size.width / 2,
+      padding: const EdgeInsets.all(5),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        color: Colors.grey.withOpacity(0.1),
+      ),
+      child: Column(
+        children: [
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Icon(
+                Icons.favorite_border_outlined,
+                color: Color.fromARGB(255, 235, 98, 88),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 130,
+            width: 130,
+            child: Image.network(
+              product.image,
+              fit: BoxFit.cover,
+            ),
+          ),
+          Text(
+            // product.title,
+            shortenedTitle,
+            style: GoogleFonts.lato(
+                color: const Color.fromARGB(255, 43, 41, 41),
+                // fontSize: 16,
+                fontWeight: FontWeight.bold),
+          ),
+          Text(
+            product.category,
+            style: GoogleFonts.lato(
+              color: const Color.fromARGB(255, 235, 98, 88),
+            ),
+          ),
+          Text(
+            '\$ ${product.price}',
+            style: GoogleFonts.lato(
+                color: const Color.fromARGB(255, 43, 41, 41),
+                // fontSize: 18,
+                fontWeight: FontWeight.bold),
+          ),
+        ],
       ),
     );
   }
