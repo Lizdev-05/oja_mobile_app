@@ -206,80 +206,212 @@
 
 //
 
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:odja/odja_page.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
 
-class _HomeScreenState extends State<HomeScreen> {
-  int isSelected = 0;
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Our Products",
-            style: GoogleFonts.lato(fontSize: 27, fontWeight: FontWeight.bold),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _buildProductCategory(index: 0, name: "All Products"),
-              _buildProductCategory(index: 1, name: "Wears"),
-              _buildProductCategory(index: 2, name: "Men's Wears"),
-              _buildProductCategory(index: 3, name: "Womens' Wears"),
-              _buildProductCategory(index: 4, name: "Accessories"),
-              _buildProductCategory(index: 5, name: "Gadgets"),
-            ],
-          ),
-          const OdjaPage(),
-        ],
-      ),
-    );
-  }
 
-  _buildProductCategory({required int index, required String name}) {
-    return SizedBox(
-      height: 50,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        shrinkWrap: true,
-        itemCount: 5,
-        itemBuilder: (context, index) => Padding(
-          padding: EdgeInsets.all(5),
-          child: Row(mainAxisSize: MainAxisSize.min, children: [
-            Container(
-              width: 100,
-              height: 40,
-              margin: const EdgeInsets.only(top: 10, right: 10),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                // color: const Color.fromARGB(255, 255, 115, 64),
-                color: isSelected == index
-                    ? const Color.fromARGB(255, 255, 115, 64)
-                    : const Color.fromARGB(255, 200, 118, 88),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Text(
-                name,
-                style: GoogleFonts.lato(
-                  color: Colors.white,
-                ),
-              ),
-            )
-          ]),
-        ),
-      ),
-    );
-  }
-}
+
+
+
+
+
+// import 'package:flutter/material.dart';
+// import 'package:google_fonts/google_fonts.dart';
+// import 'package:odja/odja_page.dart';
+
+// class HomeScreen extends StatefulWidget {
+//   const HomeScreen({super.key});
+
+//   @override
+//   State<HomeScreen> createState() => _HomeScreenState();
+// }
+
+// class _HomeScreenState extends State<HomeScreen> {
+//   int isSelected = 0;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.all(20.0),
+//       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: [
+//           Text(
+//             "Our Products",
+//             style: GoogleFonts.lato(fontSize: 27, fontWeight: FontWeight.bold),
+//           ),
+//           Row(
+//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//             children: [
+//               _buildProductCategory(index: 0, name: "All Products"),
+//               _buildProductCategory(index: 1, name: "Wears"),
+//               _buildProductCategory(index: 2, name: "Men's Wears"),
+//               _buildProductCategory(index: 3, name: "Womens' Wears"),
+//               _buildProductCategory(index: 4, name: "Accessories"),
+//               _buildProductCategory(index: 5, name: "Gadgets"),
+//             ],
+//           ),
+//           const OdjaPage(),
+//         ],
+//       ),
+//     );
+//   }
+
+//   _buildProductCategory({required int index, required String name}) {
+//     return SizedBox(
+//       height: 50,
+//       child: ListView.builder(
+//         scrollDirection: Axis.horizontal,
+//         shrinkWrap: true,
+//         itemCount: 5,
+//         itemBuilder: (context, index) => Padding(
+//           padding: EdgeInsets.all(5),
+//           child: Row(mainAxisSize: MainAxisSize.min, children: [
+//             Container(
+//               width: 100,
+//               height: 40,
+//               margin: const EdgeInsets.only(top: 10, right: 10),
+//               alignment: Alignment.center,
+//               decoration: BoxDecoration(
+//                 // color: const Color.fromARGB(255, 255, 115, 64),
+//                 color: isSelected == index
+//                     ? const Color.fromARGB(255, 255, 115, 64)
+//                     : const Color.fromARGB(255, 200, 118, 88),
+//                 borderRadius: BorderRadius.circular(8),
+//               ),
+//               child: Text(
+//                 name,
+//                 style: GoogleFonts.lato(
+//                   color: Colors.white,
+//                 ),
+//               ),
+//             )
+//           ]),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//of recent
+
+// import 'package:flutter/material.dart';
+// import 'package:google_fonts/google_fonts.dart';
+// import 'package:odja/odja_page.dart';
+// import 'package:odja/product.dart'; // Import Product model
+
+// class HomeScreen extends StatefulWidget {
+//   const HomeScreen({super.key});
+
+//   @override
+//   State<HomeScreen> createState() => _HomeScreenState();
+// }
+
+// List<Product> products = [];
+
+// class _HomeScreenState extends State<HomeScreen> {
+//   int isSelected = 0;
+//   List<Product> filteredProducts = []; // Store filtered products
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     filteredProducts = products; // Initially show all products
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.all(20.0),
+//       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: [
+//           Text(
+//             "Our Products",
+//             style: GoogleFonts.lato(fontSize: 27, fontWeight: FontWeight.bold),
+//           ),
+          // SizedBox(
+          //   height: 50,
+          //   child: ListView(
+          //     scrollDirection: Axis.horizontal,
+          //     children: [
+          //       _buildProductCategory(index: 0, name: "All Products"),
+          //       _buildProductCategory(index: 1, name: "Men's Wears"),
+          //       _buildProductCategory(index: 2, name: "Womens' Wears"),
+          //       _buildProductCategory(index: 3, name: "Wears"),
+          //       _buildProductCategory(index: 4, name: "Gadgets"),
+          //     ],
+          //   ),
+          // ),
+//           const SizedBox(height: 20),
+//           // Expanded(
+//           //     // Use Expanded for flexible height
+//           //     child: isSelected == 0
+//           //         ? OdjaPage(products: filteredProducts)
+//           //         : filteredProducts.category;
+//           //     // OdjaPage(products: filteredProducts), // Pass filtered products
+//           //     ),
+//           Expanded(
+//             child: isSelected == 0
+//                 ? OdjaPage(products: filteredProducts)
+//                 : OdjaPage(
+//                     products: filteredProducts
+//                         .where((product) => product.category == name)
+//                         .toList()),
+//           )
+//         ],
+//       ),
+//     );
+//   }
+
+  // _buildProductCategory({required int index, required String name}) {
+  //   return GestureDetector(
+  //     onTap: () {
+  //       setState(() {
+  //         isSelected = index;
+  //         filterProduct(name); // Filter products based on category
+  //       });
+  //     },
+  //     child: Container(
+  //       width: 120,
+  //       height: 40,
+  //       margin: const EdgeInsets.only(top: 10, right: 10),
+  //       alignment: Alignment.center,
+  //       decoration: BoxDecoration(
+  //         color: isSelected == index
+  //             ? const Color.fromARGB(255, 255, 115, 64)
+  //             : const Color.fromARGB(255, 200, 118, 88),
+  //         borderRadius: BorderRadius.circular(8),
+  //       ),
+//         child: Text(
+//           name,
+//           style: GoogleFonts.lato(
+//             color: Colors.white,
+//             fontSize: 15,
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+
+//   void filterProduct(String category) {
+//     filteredProducts =
+//         products.where((item) => item.category == category).toList();
+//   }
+// }

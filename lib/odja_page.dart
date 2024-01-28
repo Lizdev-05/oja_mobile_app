@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:odja/product.dart';
+import 'package:odja/product_detail.dart';
 
 class OdjaPage extends StatefulWidget {
   const OdjaPage({super.key});
@@ -21,7 +22,25 @@ class _OdjaPageState extends State<OdjaPage> {
     var result = await http.get(convertedUri);
     if (result.statusCode == 200) {
       List reusltingList = jsonDecode(result.body) as List;
+
       reusltingList.forEach(
+        (element) {
+          products.add(Product.fromJson(element));
+        },
+      );
+    }
+    setState(() {});
+  }
+
+  //Getting productCategory
+  Future<void> getProductCategory() async {
+    String urlCategory = "https://fakestoreapi.com/products/";
+    Uri convertedUri = Uri.parse(urlCategory);
+    var result = await http.get(convertedUri);
+    if (result.statusCode == 200) {
+      List categoryList = jsonDecode(result.body) as List;
+
+      categoryList.forEach(
         (element) {
           products.add(Product.fromJson(element));
         },
@@ -89,47 +108,57 @@ class ProductWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(8.0),
         color: Colors.grey.withOpacity(0.1),
       ),
-      child: Column(
-        children: [
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Icon(
-                Icons.favorite_border_outlined,
-                color: Color.fromARGB(255, 235, 98, 88),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ProductDetail(),
+            ),
+          );
+        },
+        child: Column(
+          children: [
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Icon(
+                  Icons.favorite_border_outlined,
+                  color: Color.fromARGB(255, 235, 98, 88),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 130,
+              width: 130,
+              child: Image.network(
+                product.image,
+                fit: BoxFit.cover,
               ),
-            ],
-          ),
-          SizedBox(
-            height: 130,
-            width: 130,
-            child: Image.network(
-              product.image,
-              fit: BoxFit.cover,
             ),
-          ),
-          Text(
-            // product.title,
-            shortenedTitle,
-            style: GoogleFonts.lato(
-                color: const Color.fromARGB(255, 43, 41, 41),
-                // fontSize: 16,
-                fontWeight: FontWeight.bold),
-          ),
-          Text(
-            product.category,
-            style: GoogleFonts.lato(
-              color: const Color.fromARGB(255, 235, 98, 88),
+            Text(
+              // product.title,
+              shortenedTitle,
+              style: GoogleFonts.lato(
+                  color: const Color.fromARGB(255, 43, 41, 41),
+                  // fontSize: 16,
+                  fontWeight: FontWeight.bold),
             ),
-          ),
-          Text(
-            '\$ ${product.price}',
-            style: GoogleFonts.lato(
-                color: const Color.fromARGB(255, 43, 41, 41),
-                // fontSize: 18,
-                fontWeight: FontWeight.bold),
-          ),
-        ],
+            Text(
+              product.category,
+              style: GoogleFonts.lato(
+                color: const Color.fromARGB(255, 235, 98, 88),
+              ),
+            ),
+            Text(
+              '\$ ${product.price}',
+              style: GoogleFonts.lato(
+                  color: const Color.fromARGB(255, 43, 41, 41),
+                  // fontSize: 18,
+                  fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
       ),
     );
   }
