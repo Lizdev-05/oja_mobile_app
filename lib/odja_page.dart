@@ -33,21 +33,21 @@ class _OdjaPageState extends State<OdjaPage> {
   }
 
   //Getting productCategory
-  Future<void> getProductCategory() async {
-    String urlCategory = "https://fakestoreapi.com/products/";
-    Uri convertedUri = Uri.parse(urlCategory);
-    var result = await http.get(convertedUri);
-    if (result.statusCode == 200) {
-      List categoryList = jsonDecode(result.body) as List;
+  // Future<void> getProductCategory() async {
+  //   String urlCategory = "https://fakestoreapi.com/products/";
+  //   Uri convertedUri = Uri.parse(urlCategory);
+  //   var result = await http.get(convertedUri);
+  //   if (result.statusCode == 200) {
+  //     List categoryList = jsonDecode(result.body) as List;
 
-      categoryList.forEach(
-        (element) {
-          products.add(Product.fromJson(element));
-        },
-      );
-    }
-    setState(() {});
-  }
+  //     categoryList.forEach(
+  //       (element) {
+  //         products.add(Product.fromJson(element));
+  //       },
+  //     );
+  //   }
+  //   setState(() {});
+  // }
 
   @override
   void initState() {
@@ -113,7 +113,9 @@ class ProductWidget extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ProductDetail(),
+              builder: (context) => ProductDetail(
+                product: product,
+              ),
             ),
           );
         },
