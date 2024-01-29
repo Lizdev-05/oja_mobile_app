@@ -31,8 +31,8 @@ class _HomeScreenState extends State<HomeScreen> {
           products.add(Product.fromJson(element));
         },
       );
+      setState(() {});
     }
-    setState(() {});
   }
 
   // Get category by name
@@ -63,7 +63,6 @@ class _HomeScreenState extends State<HomeScreen> {
           categoryListOfName.map<Product>((e) => Product.fromJson(e)).toList();
       setState(() {});
     }
-    setState(() {});
   }
 
   @override
