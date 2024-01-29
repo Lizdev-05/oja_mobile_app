@@ -56,11 +56,13 @@ class ProductDetail extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Text(
-                      product.description,
-                      style: GoogleFonts.lato(
-                        fontSize: 22,
-                        color: const Color.fromARGB(255, 70, 70, 70),
+                    Flexible(
+                      child: Text(
+                        product.description,
+                        style: GoogleFonts.lato(
+                          fontSize: 18,
+                          color: const Color.fromARGB(255, 70, 70, 70),
+                        ),
                       ),
                     )
                   ],

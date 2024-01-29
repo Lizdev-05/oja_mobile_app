@@ -7,7 +7,10 @@ import 'package:odja/product.dart';
 import 'package:odja/product_detail.dart';
 
 class OdjaPage extends StatefulWidget {
-  const OdjaPage({super.key});
+  // const OdjaPage({super.key});
+  final List<Product> products;
+
+  const OdjaPage({Key? key, required this.products}) : super(key: key);
 
   @override
   State<OdjaPage> createState() => _OdjaPageState();
@@ -15,6 +18,7 @@ class OdjaPage extends StatefulWidget {
 
 class _OdjaPageState extends State<OdjaPage> {
   List<Product> products = [];
+  List<String> categories = [];
 
   Future<void> getProductData() async {
     String url = "https://fakestoreapi.com/products/";
@@ -32,26 +36,10 @@ class _OdjaPageState extends State<OdjaPage> {
     setState(() {});
   }
 
-  //Getting productCategory
-  // Future<void> getProductCategory() async {
-  //   String urlCategory = "https://fakestoreapi.com/products/";
-  //   Uri convertedUri = Uri.parse(urlCategory);
-  //   var result = await http.get(convertedUri);
-  //   if (result.statusCode == 200) {
-  //     List categoryList = jsonDecode(result.body) as List;
-
-  //     categoryList.forEach(
-  //       (element) {
-  //         products.add(Product.fromJson(element));
-  //       },
-  //     );
-  //   }
-  //   setState(() {});
-  // }
-
   @override
   void initState() {
     getProductData();
+
     super.initState();
   }
 
@@ -79,9 +67,11 @@ class _OdjaPageState extends State<OdjaPage> {
                     crossAxisSpacing: 12,
                     mainAxisSpacing: 12,
                   ),
-                  itemCount: products.length,
+                  // itemCount: products.length,
+                  itemCount: widget.products.length,
                   itemBuilder: (BuildContext context, index) {
-                    return ProductWidget(product: products[index]);
+                    // return ProductWidget(product: products[index]);
+                    return ProductWidget(product: widget.products[index]);
                   },
                 ),
               ),

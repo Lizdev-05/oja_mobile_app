@@ -25,7 +25,9 @@ class _OdjaAppState extends State<OdjaApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
+          elevation: 0,
           backgroundColor: const Color.fromARGB(255, 255, 115, 64),
           title: Text(
             "Buy Better!",
